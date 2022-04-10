@@ -1,4 +1,4 @@
-package com.example.spring.entities;
+package com.example.spring.services.model;
 
 /**
  * @author nelson-yeh-fy (https://https://github.com/nelson-yeh-fy)

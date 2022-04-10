@@ -1,7 +1,8 @@
-package com.example.spring.services;
+package com.example.spring.services.controller;
 
-import com.example.spring.entities.*;
 import java.util.concurrent.atomic.AtomicLong;
+
+import com.example.spring.services.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
