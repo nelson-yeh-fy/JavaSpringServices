@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "https://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
@@ -94,7 +95,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long id) {
         try {
             customerRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -103,7 +104,7 @@ public class CustomerController {
         }
     }
     @DeleteMapping("/customers")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllCustomers() {
         try {
             customerRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
