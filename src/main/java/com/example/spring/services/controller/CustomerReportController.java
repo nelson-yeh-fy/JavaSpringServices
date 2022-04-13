@@ -44,12 +44,33 @@ public class CustomerReportController {
     }
 
     @PostMapping("/customerReports")
-    public ResponseEntity<CustomerReport> createCustomerReports(@RequestBody CustomerReport customerReport) {
+    public ResponseEntity<CustomerReport> createCustomerReport(@RequestBody CustomerReport customerReport) {
         try {
             CustomerReport _report = customerReportRepository
                     .save(new CustomerReport(customerReport.getGender(), customerReport.getCount()) );
             return new ResponseEntity<>(_report, HttpStatus.CREATED);
         } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //@PostMapping("/customerReportsList")
+    @RequestMapping(value="customerReportsList", method=RequestMethod.POST,consumes="application/json",produces="application/json")
+    @ResponseBody
+    public ResponseEntity<List<CustomerReport>> createMultipleCustomerReports(@RequestBody CustomerReportWrapper wrapper) {
+        try {
+            //List<String> response = new ArrayList<String>();
+            List<CustomerReport> responseList = new ArrayList();
+            for(CustomerReport cr : wrapper.getCustomerReportList()) {
+                CustomerReport _report = customerReportRepository
+                        .save(new CustomerReport(cr.getGender(), cr.getCount()));
+                //response.add("Saved CustomerReport: " + cr.toString());
+                responseList.add(_report);
+            }
+            //return response;
+            return new ResponseEntity<>(responseList, HttpStatus.CREATED);
+        } catch (Exception e) {
+            //return new ArrayList<String>();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
